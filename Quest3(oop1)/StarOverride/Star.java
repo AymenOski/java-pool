@@ -27,7 +27,10 @@ public class Star extends CelestialObject{
     }
     @Override
     public boolean equals(Object object) {
-        if (object == null) {
+        if (this == object) {
+            return true;
+        }
+        if (!(object instanceof Star)) {
             return false;
         }
 
