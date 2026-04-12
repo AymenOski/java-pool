@@ -38,7 +38,7 @@ public class Character {
         result.append("------------------------------------------\n");
         result.append("Characters currently fighting :\n");
         for (Character ch : allCharacters){
-            result.append(String.format("`- %s\n", ch.toString()));
+            result.append(String.format(" - %s\n", ch.toString()));
         }
         result.append("------------------------------------------\n");
         return result.toString();
