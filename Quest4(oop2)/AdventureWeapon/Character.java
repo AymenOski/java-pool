@@ -1,13 +1,26 @@
 import java.util.ArrayList;
+
 import java.util.List;
 
-public class Character {
+public abstract class Character {
     private final int maxHealth;
     private int currentHealth;
     private final String name;
+    private Weapon weapon;
 
     private static List<Character> allCharacters = new ArrayList<>();
+    
+    public Character(String name, int maxHealth ,Weapon weapon) {
+        this.name = name;
+        this.maxHealth = maxHealth;
+        this.currentHealth = maxHealth;
+        this.weapon = weapon;
+        allCharacters.add(this);
+    }
 
+    public Weapon getWeapon(){
+        return this.weapon;
+    }
     public int getMaxHealth() {
         return this.maxHealth;
     }
@@ -15,17 +28,14 @@ public class Character {
     public int getCurrentHealth() {
         return this.currentHealth;
     }
+    protected void setCurrentHealth(int currectHealth) {
+        this.currentHealth = currectHealth;
+    }
 
     public String getName() {
         return this.name;
     }
 
-    public Character(String name, int maxHealth) {
-        this.name = name;
-        this.maxHealth = maxHealth;
-        this.currentHealth = maxHealth;
-        allCharacters.add(this);
-    }
 
     public static String printStatus() {
         StringBuilder result = new StringBuilder();
@@ -38,11 +48,10 @@ public class Character {
         result.append("------------------------------------------\n");
         result.append("Characters currently fighting :\n");
         for (Character ch : allCharacters){
-            result.append(String.format("   - %s\n", ch.toString()));
+            result.append(String.format(" - %s\n", ch.toString()));
         }
         result.append("------------------------------------------\n");
         return result.toString();
-
     }
 
     public static Character fight(Character ch1, Character ch2) {
@@ -60,22 +69,14 @@ public class Character {
 
     @Override
     public String toString() {
-        if (this.currentHealth == 0) {
+        if (this.currentHealth <= 0) {
             return String.format("%s : KO", this.name);
         }
         return String.format("%s : %d/%d", this.name, this.currentHealth, this.maxHealth);
     }
 
-    public void takeDamage(int hit) {
-        if (this.currentHealth - hit <= 0) {
-            this.currentHealth = 0;
-            return;
-        }
-        this.currentHealth -= hit;
-    }
+    public abstract void takeDamage(int hit);
 
-    public void attack(Character ch) {
-        ch.takeDamage(9);
-    }
+    public abstract void attack(Character ch);
 
 }
