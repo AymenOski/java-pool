@@ -1,0 +1,13 @@
+import java.util.Set;
+
+public class ExerciseRunner {
+
+    public static void main(String[] args) {
+        System.out.println(KeepTheChange.computeChange(18, Set.of(1, 3, 7)));
+    }
+}
+
+// $ javac *.java -d build
+// $ java -cp build ExerciseRunner 
+// [7, 7, 3, 1]
+// $ 
